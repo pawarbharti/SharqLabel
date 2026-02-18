@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main>
-      <Navbar />
+     
 
       <section className="relative h-[90vh] flex items-center justify-center text-center">
         <Image

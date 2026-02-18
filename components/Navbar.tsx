@@ -1,26 +1,78 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import ThemeToggle from "./ThemeToggle";
+import { Search, Heart, ShoppingBag, User } from "lucide-react";
 
 export default function Navbar() {
   const { theme } = useTheme();
 
-  return (
-    <nav className="flex justify-between items-center px-6 py-4 border-b dark:border-gray-800">
-      <Image
-        src={theme === "dark" ? "/logo-dark.png" : "/logo-light.jpeg"}
-        alt="Sharq Label"
-        width={140}
-        height={40}
-      />
+  const navLinks = [
+    { name: "Shop", href: "/shop" },
+    { name: "New Arrivals", href: "/new" },
+    { name: "Collections", href: "/collections" },
+    { name: "About", href: "/about" },
+  ];
 
+  const actionIcons = [
+    { icon: Search, href: "/search" },
+    { icon: Heart, href: "/wishlist" },
+    { icon: ShoppingBag, href: "/cart" },
+    { icon: User, href: "/account" },
+  ];
+
+  return (
+    <nav
+      className="flex items-center justify-between px-12 h-[75px] 
+                    bg-bg border-b border-borderCustom 
+                    transition-all duration-700 ease-in-out"
+    >
+      {/* Logo */}
+      <Link href="/" className="relative h-[60px] aspect-square">
+        <Image
+          src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
+          alt="Sharq Label"
+          fill
+          className="object-contain"
+          priority
+        />
+      </Link>
+
+      {/* Center Links */}
+      <div
+        className="hidden md:flex items-center gap-10 
+                      text-sm tracking-[0.2em] uppercase 
+                      text-textSecondary"
+      >
+        {navLinks.map((link) => (
+          <Link
+            key={link.name}
+            href={link.href}
+            className="hover:text-textPrimary transition-colors duration-300"
+          >
+            {link.name}
+          </Link>
+        ))}
+      </div>
+
+      {/* Right Icons */}
       <div className="flex items-center gap-6">
-        <a className="hover:text-gray-500 transition">Shop</a>
-        <a className="hover:text-gray-500 transition">New</a>
-        <a className="hover:text-gray-500 transition">About</a>
-        <ThemeToggle />
+        {actionIcons.map(({ icon: Icon, href }, index) => (
+          <Link key={index} href={href}>
+            <Icon
+              size={20}
+              className="text-icon hover:text-iconHover 
+                         transition-colors duration-300 cursor-pointer"
+            />
+          </Link>
+        ))}
+
+        {/* Theme Toggle */}
+        <div className="ml-4">
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );
