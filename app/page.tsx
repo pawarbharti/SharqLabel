@@ -8,10 +8,11 @@ export default function Home() {
 
       <section className="relative h-[90vh] flex items-center justify-center text-center">
         <Image
-          src="/hero.jpg"
+          src="/bg.jpg"
           alt="Luxury Fashion"
           fill
           className="object-cover -z-10"
+          
         />
 
         <div className="bg-black/40 absolute inset-0 -z-10" />
