@@ -11,9 +11,8 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Shop", href: "/shop" },
-    { name: "New Arrivals", href: "/new" },
+    { name: "New Arrivals", href: "/new-arrivals" },
     { name: "Collections", href: "/collections" },
-    { name: "About", href: "/about" },
   ];
 
   const actionIcons = [
