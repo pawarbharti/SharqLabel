@@ -12,38 +12,38 @@ interface Product {
 const dummyProducts: Product[] = [
   {
     id: 1,
-    name: "Luxury Leather Bag",
-    description: "High-quality leather bag perfect for daily use.",
-    price: 199,
-    image: "/images/bag1.jpg",
+    name: "Premium Cotton T-Shirt",
+    description: "Soft cotton tee crafted for everyday comfort.",
+    price: 39,
+    image: "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 2,
-    name: "Stylish Sneakers",
-    description: "Comfortable and trendy sneakers for all occasions.",
-    price: 129,
-    image: "/images/shoes1.jpg",
+    name: "Slim Fit Formal Shirt",
+    description: "Tailored shirt perfect for business occasions.",
+    price: 79,
+    image: "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 3,
-    name: "Elegant Watch",
-    description: "Classic design watch with premium finish.",
-    price: 299,
-    image: "/images/watch1.jpg",
+    name: "Oversized Street T-Shirt",
+    description: "Relaxed fit with bold modern aesthetic.",
+    price: 45,
+    image: "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 4,
-    name: "Designer Sunglasses",
-    description: "Protect your eyes with style.",
-    price: 99,
-    image: "/images/sunglasses1.jpg",
+    name: "Casual Linen Shirt",
+    description: "Breathable linen fabric for summer styling.",
+    price: 89,
+    image: "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 5,
-    name: "Casual T-Shirt",
-    description: "Soft cotton t-shirt for everyday comfort.",
-    price: 39,
-    image: "/images/tshirt1.jpg",
+    name: "Minimal Black T-Shirt",
+    description: "Classic black essential with premium finish.",
+    price: 35,
+    image: "https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
@@ -55,44 +55,73 @@ export default function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-600">Search Products</h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-200 dark:from-black dark:to-gray-900 transition-colors duration-300 p-6">
+      
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
+          Search Products
+        </h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
+          Find your perfect T-Shirt or Shirt instantly.
+        </p>
+      </div>
 
-      <div className="max-w-xl mx-auto mb-8 text-gray-600">
+      {/* Search Input */}
+      <div className="max-w-xl mx-auto mb-10">
         <input
           type="text"
           placeholder="Search for products..."
-          className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full p-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 shadow-sm"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {/* Products Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 text-gray-600"
+            className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 group"
           >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-48 w-full object-cover"
-            />
-            <div className="p-4">
-              <h2 className="text-lg font-semibold">{product.name}</h2>
-              <p className="text-gray-600 text-sm mt-1">{product.description}</p>
-              <p className="text-purple-600 font-bold mt-2">${product.price}</p>
-              <button className="mt-3 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+            <div className="overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            <div className="p-5">
+              <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+                {product.name}
+              </h2>
+
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                {product.description}
+              </p>
+
+              <p className="text-purple-600 font-bold mt-3 text-lg">
+                ${product.price}
+              </p>
+
+              <button className="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition duration-300">
                 Add to Cart
               </button>
             </div>
           </div>
         ))}
+
         {filteredProducts.length === 0 && (
-          <p className="col-span-full text-center text-gray-500">
-            No products found.
-          </p>
+          <div className="col-span-full text-center py-16">
+            <p className="text-gray-500 dark:text-gray-400 text-lg">
+              No products found.
+            </p>
+            <p className="text-sm text-gray-400 mt-2">
+              Try searching with a different keyword.
+            </p>
+          </div>
         )}
       </div>
     </div>

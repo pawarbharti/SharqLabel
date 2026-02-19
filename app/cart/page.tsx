@@ -1,4 +1,3 @@
-// pages/cart.js (Next.js with Tailwind CSS)
 "use client";
 import { useState } from "react";
 
@@ -52,63 +51,126 @@ export default function CartPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold mb-6 text-gray-500">Your Cart</h1>
-        {cartItems.length === 0 ? (
-          <p className="text-gray-500">Your cart is empty.</p>
-        ) : (
-          <>
+    <div className="min-h-screen bg-[#0f172a] py-10 px-4 text-white">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+        
+        {/* Cart Items */}
+        <div className="md:col-span-2 bg-[#1e293b] p-6 rounded-2xl shadow-lg border border-slate-700">
+          <h1 className="text-3xl font-bold mb-6">
+            Your Cart ({cartItems.length})
+          </h1>
+
+          {cartItems.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-slate-400 text-lg">🛒 Your cart is empty.</p>
+              <button className="mt-6 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 transition rounded-xl font-semibold">
+                Continue Shopping
+              </button>
+            </div>
+          ) : (
             <div className="space-y-6">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row items-center sm:items-start justify-between border-b pb-4"
+                  className="flex flex-col sm:flex-row gap-6 border-b border-slate-700 pb-6"
                 >
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-24 h-24 object-cover rounded-lg mb-4 sm:mb-0"
+                    className="w-28 h-28 object-cover rounded-xl border border-slate-600"
                   />
-                  <div className="flex-1 sm:ml-6">
-                    <h2 className="text-xl font-semibold text-gray-500">{item.name}</h2>
-                    <p className="text-gray-500">{item.description}</p>
-                    <p className="mt-2 font-bold text-gray-500">${item.price.toFixed(2)}</p>
-                    <div className="mt-2 flex items-center space-x-2">
+
+                  <div className="flex-1">
+                    <h2 className="text-xl font-semibold">
+                      {item.name}
+                    </h2>
+
+                    <p className="text-slate-400 text-sm mt-1">
+                      {item.description}
+                    </p>
+
+                    <p className="mt-2 text-lg font-bold text-indigo-400">
+                      ${item.price.toFixed(2)}
+                    </p>
+
+                    {/* Quantity Controls */}
+                    <div className="mt-3 flex items-center gap-3">
                       <button
-                        onClick={() => handleQuantityChange(item.id, -1)}
-                        className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                        onClick={() =>
+                          handleQuantityChange(item.id, -1)
+                        }
+                        disabled={item.quantity === 1}
+                        className={`px-3 py-1 rounded border ${
+                          item.quantity === 1
+                            ? "bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed"
+                            : "bg-slate-700 hover:bg-slate-600 border-slate-600"
+                        }`}
                       >
                         -
                       </button>
-                      <span>{item.quantity}</span>
+
+                      <span className="font-medium">
+                        {item.quantity}
+                      </span>
+
                       <button
-                        onClick={() => handleQuantityChange(item.id, 1)}
-                        className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                        onClick={() =>
+                          handleQuantityChange(item.id, 1)
+                        }
+                        className="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded border border-slate-600"
                       >
                         +
                       </button>
+
                       <button
                         onClick={() => handleRemoveItem(item.id)}
-                        className="ml-4 text-red-500 hover:underline"
+                        className="ml-4 text-red-400 hover:text-red-500 text-sm"
                       >
                         Remove
                       </button>
                     </div>
+
+                    <p className="mt-3 text-sm text-slate-400">
+                      Subtotal: $
+                      {(item.price * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
+          )}
+        </div>
 
-            <div className="mt-6 flex flex-col sm:flex-row justify-between items-center">
-              <p className="text-2xl font-bold text-gray-500">
-                Total: ${totalAmount.toFixed(2)}
-              </p>
-              <button className="mt-4 sm:mt-0 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">
-                Checkout
-              </button>
+        {/* Order Summary */}
+        {cartItems.length > 0 && (
+          <div className="bg-[#1e293b] p-6 rounded-2xl shadow-lg border border-slate-700 h-fit sticky top-10">
+            <h2 className="text-xl font-semibold mb-4">
+              Order Summary
+            </h2>
+
+            <div className="flex justify-between mb-2 text-slate-400">
+              <span>Subtotal</span>
+              <span>${totalAmount.toFixed(2)}</span>
             </div>
-          </>
+
+            <div className="flex justify-between mb-4 text-slate-400">
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
+
+            <hr className="my-4 border-slate-700" />
+
+            <div className="flex justify-between text-lg font-bold">
+              <span>Total</span>
+              <span className="text-indigo-400">
+                ${totalAmount.toFixed(2)}
+              </span>
+            </div>
+
+            <button className="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 transition py-3 rounded-xl font-semibold shadow-md">
+              Proceed to Checkout
+            </button>
+          </div>
         )}
       </div>
     </div>

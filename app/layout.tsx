@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -11,10 +12,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-black transition-colors duration-500">
-        <ThemeProvider attribute="class">
-           <Navbar />
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
+          <Navbar />
           {children}
+           <Footer />
         </ThemeProvider>
       </body>
     </html>

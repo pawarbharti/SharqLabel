@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import Navbar from "@/components/Navbar";
-import ThemeToggle from "@/components/ThemeToggle";
 
 interface Product {
   id: number;
@@ -14,87 +12,101 @@ interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: "Luxury Leather Bag",
-    price: "$120",
+    name: "Premium Cotton T-Shirt",
+    price: "$30",
     image:
-      "https://images.unsplash.com/photo-1600185363484-b0b746ff20c2?auto=format&fit=crop&w=500&q=80",
-    description: "Elegant and premium leather bag perfect for daily use.",
+      "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?auto=format&fit=crop&w=800&q=80",
+    description: "Soft premium cotton t-shirt crafted for everyday comfort.",
   },
   {
     id: 2,
-    name: "Stylish Sunglasses",
-    price: "$45",
+    name: "Oversized Graphic T-Shirt",
+    price: "$38",
     image:
-      "https://images.unsplash.com/photo-1586864387333-1f0e1b48eb94?auto=format&fit=crop&w=500&q=80",
-    description: "Trendy sunglasses to keep you stylish under the sun.",
+      "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?auto=format&fit=crop&w=800&q=80",
+    description: "Bold street-style oversized tee with graphic print.",
   },
   {
     id: 3,
-    name: "Smartwatch Series 5",
-    price: "$250",
+    name: "Formal Slim Fit Shirt",
+    price: "$55",
     image:
-      "https://images.unsplash.com/photo-1579660684393-1b9f7a3d2c17?auto=format&fit=crop&w=500&q=80",
-    description: "Stay connected with the latest smartwatch technology.",
+      "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?auto=format&fit=crop&w=800&q=80",
+    description: "Sharp tailored shirt for formal and business wear.",
   },
   {
     id: 4,
-    name: "Elegant Sneakers",
-    price: "$90",
+    name: "Casual Linen Shirt",
+    price: "$60",
     image:
-      "https://images.unsplash.com/photo-1618354698195-3ed08e9e8a1b?auto=format&fit=crop&w=500&q=80",
-    description: "Comfortable sneakers with a sleek modern design.",
+      "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?auto=format&fit=crop&w=800&q=80",
+    description: "Breathable summer linen shirt with relaxed fit.",
   },
   {
     id: 5,
-    name: "Classic Watch",
-    price: "$180",
+    name: "Minimal Black T-Shirt",
+    price: "$28",
     image:
-      "https://images.unsplash.com/photo-1519648023493-d82b5f8d7b9a?auto=format&fit=crop&w=500&q=80",
-    description: "Timeless watch with a leather strap and metal finish.",
+      "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?auto=format&fit=crop&w=800&q=80",
+    description: "Classic black tee with premium fabric finish.",
   },
   {
     id: 6,
-    name: "Denim Jacket",
-    price: "$70",
+    name: "Striped Casual Shirt",
+    price: "$52",
     image:
-      "https://images.unsplash.com/photo-1593032465177-fb217e9c6da0?auto=format&fit=crop&w=500&q=80",
-    description: "Stylish denim jacket perfect for casual outings.",
+      "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?auto=format&fit=crop&w=800&q=80",
+    description: "Modern striped shirt designed for smart casual styling.",
   },
 ];
 
-const NewArrivalsPage = () => {
+export default function NewArrivalsPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
-
-      <header className="bg-white shadow-md py-6">
-        <div className="container mx-auto px-6">
-          <h1 className="text-3xl font-bold text-gray-800">New Arrivals</h1>
-          <p className="text-gray-600 mt-2">
-            Check out our latest products that just arrived!
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-200 dark:from-black dark:to-gray-900 transition-colors duration-300">
+      
+      {/* Header */}
+      <header className="bg-white dark:bg-gray-950 shadow-md py-10">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-white tracking-wide">
+            New Arrivals
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-3">
+            Fresh styles just dropped. Elevate your wardrobe today.
           </p>
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-10">
+      {/* Products Grid */}
+      <main className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 group"
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-4">
-                <h2 className="text-lg font-semibold text-gray-800">
+              <div className="overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              <div className="p-5">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
                   {product.name}
                 </h2>
-                <p className="text-gray-600 mt-1">{product.description}</p>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-gray-800 font-bold">{product.price}</span>
-                  <button className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 transition">
+
+                <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">
+                  {product.description}
+                </p>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-gray-900 dark:text-white font-bold text-lg">
+                    {product.price}
+                  </span>
+
+                  <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
                     Add to Cart
                   </button>
                 </div>
@@ -105,6 +117,4 @@ const NewArrivalsPage = () => {
       </main>
     </div>
   );
-};
-
-export default NewArrivalsPage;
+}
